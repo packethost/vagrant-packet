@@ -137,8 +137,7 @@ module VagrantPlugins
                   b2.use StartInstance # restart this instance
                 else
                   b2.use MessageAlreadyCreated
-                  # TODO
-                  # write a better message
+                  # TODO: write a better message
                 end
               end
             else
@@ -160,17 +159,16 @@ module VagrantPlugins
             end
 
             b2.use action_halt
-            b2.use Call, WaitForState, :stopped, 120 do |env2, b3|
+            b2.use Call, WaitForState, :inactive, 120 do |env2, b3|
               b3.use action_up if env2[:result]
-              # TODO
-              # we couldn't reach :stopped, what now?
+              # TODO: we couldn't reach :stopped, what now?
             end
           end
         end
       end
 
       # The autoload farm
-      action_root = Pathname.new(File.expand_path('../action', __DIR__))
+      action_root = Pathname.new(File.expand_path('action', __dir__))
       autoload :ConnectPacket, action_root.join('connect_packet')
       autoload :IsCreated, action_root.join('is_created')
       autoload :IsStopped, action_root.join('is_stopped')

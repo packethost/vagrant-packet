@@ -1,5 +1,7 @@
-require "log4r"
-require "timeout"
+# frozen_string_literal: true
+
+require 'log4r'
+require 'timeout'
 
 module VagrantPlugins
   module Packet
@@ -9,9 +11,9 @@ module VagrantPlugins
         # env[:result] will be false in case of timeout.
         # @param [Symbol] state Target machine state.
         # @param [Number] timeout Timeout in seconds.
-        def initialize(app, env, state, timeout)
+        def initialize(app, _env, state, timeout)
           @app     = app
-          @logger  = Log4r::Logger.new("vagrant_packet::action::wait_for_state")
+          @logger  = Log4r::Logger.new('vagrant_packet::action::wait_for_state')
           @state   = state
           @timeout = timeout
         end
@@ -19,14 +21,12 @@ module VagrantPlugins
         def call(env)
           env[:result] = true
           if env[:machine].state.id == @state
-            @logger.info(I18n.t("vagrant_packet.already_status", :status => @state))
+            @logger.info(I18n.t('vagrant_packet.already_status', status: @state))
           else
             @logger.info("Waiting for machine to reach state #{@state}")
             begin
               Timeout.timeout(@timeout) do
-                until env[:machine].state.id == @state
-                  sleep 2
-                end
+                sleep 2 until env[:machine].state.id == @state
               end
             rescue Timeout::Error
               env[:result] = false # couldn't reach state in time

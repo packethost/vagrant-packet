@@ -6,7 +6,7 @@ require 'vagrant-packet/plugin'
 module VagrantPlugins
   # Top level module for Packet Plugin
   module Packet
-    lib_path = Pathname.new(File.expand_path('../vagrant-packet', __DIR__))
+    lib_path = Pathname.new(File.expand_path('vagrant-packet', __dir__))
     autoload :Action, lib_path.join('action')
     autoload :Errors, lib_path.join('errors')
 
@@ -14,7 +14,7 @@ module VagrantPlugins
     #
     # @return [Pathname]
     def self.source_root
-      @source_root ||= Pathname.new(File.expand_path('../../', __DIR__))
+      @source_root ||= Pathname.new(File.expand_path('../', __dir__))
     end
   end
 end

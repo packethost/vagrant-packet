@@ -22,7 +22,6 @@ module VagrantPlugins
         def call(env)
           # Initialize metrics if they haven't been
           env[:metrics] ||= {}
-
           # Get the configs
           machine = env[:machine]
 
@@ -57,59 +56,46 @@ module VagrantPlugins
 
           begin
             server = env[:packet_compute].devices.create(options)
-          rescue Fog::Compute::Packet::NotFound => e
-            # Invalid subnet doesn't have its own error so we catch and
-            # check the error message here.
-            raise(Errors::FogError, message: "Subnet ID not found: #{subnet_id}") if e.message match?(/subnet ID/)
-          rescue Fog::Compute::Packet::Error => e
-            raise(Errors::FogError, message: e.message)
-          rescue Excon::Errors::HTTPStatusError => e
-            raise(Errors::InternalFogError, error: e.message, response: e.response.body)
+          rescue *FOR_ERRORS => e
+            # TODO: Flesh this out, mostly delete everything about the instance
+            raise Errors::FogError, message: e.message
           end
 
           # Immediately save the ID since it is created at this point.
           env[:machine].id = server.id
-
           # Wait for the instance to be ready first
           env[:metrics]['instance_ready_time'] = Util::Timer.time do
             tries = machine.provider_config.instance_ready_timeout / 2
-
             env[:ui].info(I18n.t('vagrant_packet.waiting_for_ready'))
             begin
               retryable(on: Fog::Errors::TimeoutError, tries: tries) do
                 # If we're interrupted don't worry about waiting
+                # otherwise wait for the server to be ready
                 next if env[:interrupted]
-
-                # Wait for the server to be ready
                 server.wait_for(2, machine.provider_config.instance_check_interval) { ready? }
               end
             rescue Fog::Errors::TimeoutError
-              # Delete the instance
+              # Delete the instance and notify the user
               terminate(env)
-
-              # Notify the user
               raise(Errors::InstanceReadyTimeout, timeout: machine.provider_config.instance_ready_timeout)
             end
           end
 
           @logger.info("Time to instance ready: #{env[:metrics]['instance_ready_time']}")
-
           unless env[:interrupted]
             env[:metrics]['instance_ssh_time'] = Util::Timer.time do
               # Wait for SSH to be ready.
               env[:ui].info(I18n.t('vagrant_packet.waiting_for_ssh'))
               network_ready_retries = 0
               network_ready_retries_max = 10
-              # rubocop:disable Lint/LiteralAsCondition
-              while true
-                # If we're interrupted then just back out
-                break if env[:interrupted]
+              loop do
                 # When a packet device comes up, it's networking may not be ready
                 # by the time we connect.
+                break if env[:interrupted]
                 begin
                   break if env[:machine].communicate.ready?
-                rescue Exception => e
-                  if network_ready_retries < network_ready_retries_max
+                rescue Exception => e # rubocop:disable Lint/RescueException
+                  if network_ready_retries < network_ready_retries_max # rubocop:disable Style/GuardClause
                     network_ready_retries += 1
                     @logger.warn(I18n.t('vagrant_packet.waiting_for_ssh, retrying'))
                   else
@@ -118,7 +104,6 @@ module VagrantPlugins
                 end
                 sleep 2
               end
-              # rubocop:enable Lint/LiteralAsCondition
             end
 
             @logger.info("Time till SSH ready: #{env[:metrics]['instance_ssh_time']}")
@@ -129,7 +114,6 @@ module VagrantPlugins
 
           # Terminate the instance if we were interrupted
           terminate(env) if env[:interrupted]
-
           @app.call(env)
         end
 
