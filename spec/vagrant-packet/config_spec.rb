@@ -35,7 +35,7 @@ describe VagrantPlugins::Packet::Config do
     its("hostname")          { should be_nil }
     its("plan")              { should be_nil }
     its("facility")          { should be_nil }
-    its("operating_system")  { should be_nil }
+    its("operating_system")  { should == "ubuntu_16_04" }
     its("description")       { should be_nil }
     its("billing_cycle")     { should be_nil }
     its("always_pxe")        { should be_nil }
