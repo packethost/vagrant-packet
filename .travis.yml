@@ -1,6 +1,12 @@
 language: ruby
 sudo: false
 rvm:
-- ruby-head
-- 2.3
-- 2.2
+- 2.4
+env:
+- CI=true
+deploy:
+  provider: rubygems
+  on:
+    tags: true
+  api_key:
+    secure: ShYgXWqojFknzVOKYv9ZRjMzMJO4w6y2clSXZlwUTIw/k2y1t/jLtwStVoch2Ug8o3kcXF4EsBZlacTgzMh7EtQZyiAvrv+SWbK/Y9BsWdzEEyEWqAxAUnepMKuAHCJtXqMbiSD9LXOdCGxOorNWqjDuyf/OqpU8/H71G7LIdn2B6dVSGPsHSny/jFeN/mOEX/vc2Gsbb6NcJFGzxB5/DnWUV6GJswrhujK8raMSoozPhZ/JpuOUwXWiHeuXojBobMLmhklm5j9PU+F/TvfCt5yKxIZqN5EEROMXHwC26x8nw/8fnMqlp23Qd4BTkiETwvYXRgk4JthwfyYBYzDong9duKalK0/goC4iamwXcu2XR/+jtCW1JmpPJH8LZqrvsMYOF7zcpVSphRjAV9AAn9CnotywW78S5+dyQUo3AZQjy9DwYpWQu41tSWQo5BPGHpxIlsALCo/DiyzdRyEvzLFHFRShsTKGDsOw+vQl66OCy29I1EXNfrzJS2biKqvkezfz6GsmwhQoz3FNHeLzszq6W53l8sMOn7H7ecvOOb2krJRl9w8GFi0vZ1b8CXmNzCSkn61shkKt2HgByLUDzpf+4grJdOiGTfy56zzfV9B7t0trm+aZp+S+LXKj4XJPHdkP4Q7cFlJWvwSzR5SHFwt4YJH8wvW2wKgBo0BUaKw=
