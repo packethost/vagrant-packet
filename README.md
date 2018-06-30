@@ -51,3 +51,29 @@ Vagrant.configure("2") do |config|
     end
 end
 ```
+
+## Development
+To work on the `vagrant-packet` plugin, clone this repository out, and use
+[Bundler](http://gembundler.com) to get the dependencies:
+
+```
+$ bundle
+```
+
+Once you have the dependencies, verify the unit tests pass with `rake`:
+
+```
+$ bundle exec rake
+```
+
+If those pass, you're ready to start developing the plugin. You can test
+the plugin without installing it into your Vagrant environment by just
+creating a `Vagrantfile` in the top level of this directory (it is gitignored)
+and add the following line to your `Vagrantfile` 
+```ruby
+Vagrant.require_plugin "vagrant-packet"
+```
+Use bundler to execute Vagrant:
+```
+$ bundle exec vagrant --provider=packet up 
+```
