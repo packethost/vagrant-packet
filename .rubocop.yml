@@ -1,0 +1,45 @@
+AllCops:
+  TargetRubyVersion: 2.4
+
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 25
+  Exclude:
+    - 'lib/vagrant-packet/config.rb'
+    - 'lib/vagrant-packet/action/run_instance.rb'
+    - 'lib/vagrant-packet/action/start_instance.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'vagrant-packet.gemspec'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'lib/vagrant-packet/actions/run_instance.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'lib/vagrant-packet/config.rb'
+    - 'lib/vagrant-packet/action/run_instance.rb'
+    - 'lib/vagrant-packet/action/start_instance.rb'
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    - 'lib/vagrant-packet/action/run_instance.rb'
+    - 'lib/vagrant-packet/action/start_instance.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'lib/vagrant-packet/action.rb'
+
+Metrics/PerceivedComplexity:
+    Exclude:
+    - 'lib/vagrant-packet/config.rb'
+    - 'lib/vagrant-packet/action/run_instance.rb'
+    - 'lib/vagrant-packet/action/start_instance.rb'

@@ -1,4 +1,6 @@
-require "vagrant-packet/util/timer"
+# frozen_string_literal: true
+
+require 'vagrant-packet/util/timer'
 
 module VagrantPlugins
   module Packet
@@ -12,8 +14,8 @@ module VagrantPlugins
           end
 
           env[:metrics] ||= {}
-          env[:metrics]["provisioner_times"] ||= []
-          env[:metrics]["provisioner_times"] << [name, timer]
+          env[:metrics]['provisioner_times'] ||= []
+          env[:metrics]['provisioner_times'] << [name, timer]
         end
       end
     end

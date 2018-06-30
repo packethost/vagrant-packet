@@ -1,16 +1,15 @@
+# frozen_string_literal: true
+
 module VagrantPlugins
   module Packet
     module Action
       class WarnNetworks
-        def initialize(app, env)
+        def initialize(app, _env)
           @app = app
         end
 
         def call(env)
-          if env[:machine].config.vm.networks.length > 0
-            env[:ui].warn(I18n.t("vagrant_packet.warn_networks"))
-          end
-
+          env[:ui].warn(I18n.t('vagrant_packet.warn_networks')) if env[:machine].config.vm.networks.length.positive?
           @app.call(env)
         end
       end

@@ -1,9 +1,11 @@
-require "log4r"
-require "vagrant"
+# frozen_string_literal: true
+
+require 'log4r'
+require 'vagrant'
 
 module VagrantPlugins
   module Packet
-    class Provider < Vagrant.plugin("2", :provider)
+    class Provider < Vagrant.plugin('2', :provider)
       def initialize(machine)
         @machine = machine
       end
@@ -18,18 +20,18 @@ module VagrantPlugins
       end
 
       def ssh_info
-        # Run a custom action called "read_ssh_info" which does what it
+        # Run a custom action called 'read_ssh_info' which does what it
         # says and puts the resulting SSH info into the `:machine_ssh_info`
         # key in the environment.
-        env = @machine.action("read_ssh_info", lock: false)
+        env = @machine.action('read_ssh_info', lock: false)
         env[:machine_ssh_info]
       end
 
       def state
-        # Run a custom action we define called "read_state" which does
+        # Run a custom action we define called 'read_state' which does
         # what it says. It puts the state in the `:machine_state_id`
         # key in the environment.
-        env = @machine.action("read_state", lock: false)
+        env = @machine.action('read_state', lock: false)
 
         state_id = env[:machine_state_id]
 
@@ -42,7 +44,7 @@ module VagrantPlugins
       end
 
       def to_s
-        id = @machine.id.nil? ? "new" : @machine.id
+        id = @machine.id.nil? ? 'new' : @machine.id
         "Packet (#{id})"
       end
     end

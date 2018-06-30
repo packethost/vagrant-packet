@@ -1,7 +1,9 @@
-require "fog"
-require "fog-packet"
-require "log4r"
-require "pp"
+# frozen_string_literal: true
+
+require 'fog'
+require 'fog-packet'
+require 'log4r'
+require 'pp'
 
 module VagrantPlugins
   module Packet
@@ -10,13 +12,13 @@ module VagrantPlugins
       # puts the Packet connection object into the `:packet_compute` key
       # in the environment.
       class ConnectPacket
-        def initialize(app, env)
+        def initialize(app, _env)
           @app    = app
-          @logger = Log4r::Logger.new("vagrant_packet::action::connect_packet")
+          @logger = Log4r::Logger.new('vagrant_packet::action::connect_packet')
         end
 
         def call(env)
-          @logger.info("Connecting to Packet...")
+          @logger.info('Connecting to Packet...')
 
           env[:packet_compute] = Fog::Compute::Packet.new(packet_token: env[:machine].provider_config.packet_token)
 

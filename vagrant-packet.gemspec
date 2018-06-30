@@ -1,39 +1,40 @@
-$:.unshift File.expand_path("../lib", __FILE__)
-require "vagrant-packet/version"
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path('lib', __dir__))
+require 'vagrant-packet/version'
 
 Gem::Specification.new do |s|
-  s.name          = "vagrant-packet"
+  s.name          = 'vagrant-packet'
   s.version       = VagrantPlugins::Packet::VERSION
   s.platform      = Gem::Platform::RUBY
-  s.license       = "MIT"
-  s.authors       = "Jeffrey Sica"
-  s.email         = "jsica@umich.edu"
-  s.homepage      = "http://www.jeefy.net"
-  s.summary       = "Enables Vagrant to manage machines in Packet."
-  s.description   = "Enables Vagrant to manage machines in Packet. Heavily based on Vagrant-AWS."
+  s.license       = 'MIT'
+  s.authors       = 'Jeffrey Sica'
+  s.email         = 'jsica@umich.edu'
+  s.homepage      = 'http://www.jeefy.net'
+  s.summary       = 'Enables Vagrant to manage machines in Packet.'
+  s.description   = 'Enables Vagrant to manage machines in Packet. Heavily based on Vagrant-AWS.'
 
-  s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project         = "vagrant-packet"
+  s.required_rubygems_version = '>= 1.3.6'
+  s.rubyforge_project         = 'vagrant-packet'
 
-  s.add_runtime_dependency "ansible"
-  s.add_runtime_dependency "fog", "~> 1.22"
-  s.add_runtime_dependency "fog-packet", "~> 1.0.1"
-  s.add_runtime_dependency "iniparse", "~> 1.4", ">= 1.4.2"
+  s.add_runtime_dependency 'fog', '~> 1.22'
+  s.add_runtime_dependency 'fog-packet', '~> 1.0.1'
 
-  s.add_development_dependency "rake"
-  # rspec 3.4 to mock File
-  s.add_development_dependency "rspec", "~> 3.4"
-  s.add_development_dependency "rspec-its"
+  s.add_development_dependency 'rake', '~> 12.3'
+  s.add_development_dependency 'rspec', '>= 3.5.0', '<= 3.6'
+  s.add_development_dependency 'rspec-its'
+  s.add_development_dependency 'rspec-legacy_formatters'
+  s.add_development_dependency 'rubocop', '~> 0.57'
 
   # The following block of code determines the files that should be included
   # in the gem. It does this by reading all the files in the directory where
   # this gemspec is, and parsing out the ignored files from the gitignore.
   # Note that the entire gitignore(5) syntax is not supported, specifically
-  # the "!" syntax, but it should mostly work correctly.
+  # the '!' syntax, but it should mostly work correctly.
   root_path      = File.dirname(__FILE__)
-  all_files      = Dir.chdir(root_path) { Dir.glob("**/{*,.*}") }
-  all_files.reject! { |file| [".", ".."].include?(File.basename(file)) }
-  gitignore_path = File.join(root_path, ".gitignore")
+  all_files      = Dir.chdir(root_path) { Dir.glob('**/{*,.*}') }
+  all_files.reject! { |file| ['.', '..'].include?(File.basename(file)) }
+  gitignore_path = File.join(root_path, '.gitignore')
   gitignore      = File.readlines(gitignore_path)
   gitignore.map!    { |line| line.chomp.strip }
   gitignore.reject! { |line| line.empty? || line =~ /^(#|!)/ }
@@ -57,6 +58,6 @@ Gem::Specification.new do |s|
   end
 
   s.files         = unignored_files
-  s.executables   = unignored_files.map { |f| f[/^bin\/(.*)/, 1] }.compact
+  s.executables   = unignored_files.map { |f| f[%r{^bin\/(.*)}, 1] }.compact
   s.require_path  = 'lib'
 end
