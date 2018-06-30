@@ -3,6 +3,7 @@
 
 # editors
 *.swp
+.vscode
 
 # Bundler/Rubygems
 *.gem
