@@ -37,15 +37,6 @@ en:
       The instance '%{name}' will not be destroyed, since the confirmation
       was declined.
 
-    config:
-      access_key_id_required: |-
-        An access key ID must be specified via "access_key_id"
-      private_key_missing: |-
-        The specified private key for Packet could not be found
-      packet_info_required: |-
-        One or more of the needed Packet credentials are missing. No environment variables
-        are set nor profile '%{profile}' exists at '%{location}'
-
     errors:
       fog_error: |-
         There was an error talking to Packet. The error message is shown
@@ -87,11 +78,6 @@ en:
       long_provisioning: |-
         The Packet server is currently being provisioned.
 
-      short_stopped: |-
-        stopped
-      long_stopped: |-
-        The Packet server is stopped. Run `vagrant up` to start it.
-
       short_inactive: |-
         stopped
       long_inactive: |-
@@ -113,9 +99,3 @@ en:
       long_active: |-
         The Packet server is running. To stop this machine, you can run
         `vagrant halt`. To destroy the machine, you can run `vagrant destroy`.
-
-      short_pending: |-
-        pending
-      long_pending: |-
-        The Packet server is still being initialized. To destroy this machine,
-        you can run `vagrant destroy`.
