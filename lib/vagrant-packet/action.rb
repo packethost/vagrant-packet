@@ -1,6 +1,7 @@
-require "pathname"
+# frozen_string_literal: true
 
-require "vagrant/action/builder"
+require 'pathname'
+require 'vagrant/action/builder'
 
 module VagrantPlugins
   module Packet
@@ -13,7 +14,7 @@ module VagrantPlugins
         Vagrant::Action::Builder.new.tap do |b|
           b.use ConfigValidate
           b.use Call, IsCreated do |env, b2|
-            if !env[:result]
+            unless env[:result]
               b2.use MessageNotCreated
               next
             end
@@ -31,7 +32,7 @@ module VagrantPlugins
             if env[:result]
               b2.use ConfigValidate
               b2.use Call, IsCreated do |env2, b3|
-                if !env2[:result]
+                unless env2[:result]
                   b3.use MessageNotCreated
                   next
                 end
@@ -52,7 +53,7 @@ module VagrantPlugins
         Vagrant::Action::Builder.new.tap do |b|
           b.use ConfigValidate
           b.use Call, IsCreated do |env, b2|
-            if !env[:result]
+            unless env[:result]
               b2.use MessageNotCreated
               next
             end
@@ -89,7 +90,7 @@ module VagrantPlugins
         Vagrant::Action::Builder.new.tap do |b|
           b.use ConfigValidate
           b.use Call, IsCreated do |env, b2|
-            if !env[:result]
+            unless env[:result]
               b2.use MessageNotCreated
               next
             end
@@ -103,7 +104,7 @@ module VagrantPlugins
         Vagrant::Action::Builder.new.tap do |b|
           b.use ConfigValidate
           b.use Call, IsCreated do |env, b2|
-            if !env[:result]
+            unless env[:result]
               b2.use MessageNotCreated
               next
             end
@@ -135,7 +136,9 @@ module VagrantPlugins
                   b2.use action_prepare_boot
                   b2.use StartInstance # restart this instance
                 else
-                  b2.use MessageAlreadyCreated # TODO write a better message
+                  b2.use MessageAlreadyCreated
+                  # TODO
+                  # write a better message
                 end
               end
             else
@@ -151,40 +154,38 @@ module VagrantPlugins
           b.use ConfigValidate
           b.use ConnectPacket
           b.use Call, IsCreated do |env, b2|
-            if !env[:result]
+            unless env[:result]
               b2.use MessageNotCreated
               next
             end
 
             b2.use action_halt
             b2.use Call, WaitForState, :stopped, 120 do |env2, b3|
-              if env2[:result]
-                b3.use action_up
-              else
-                # TODO we couldn't reach :stopped, what now?
-              end
+              b3.use action_up if env2[:result]
+              # TODO
+              # we couldn't reach :stopped, what now?
             end
           end
         end
       end
 
       # The autoload farm
-      action_root = Pathname.new(File.expand_path("../action", __FILE__))
-      autoload :ConnectPacket, action_root.join("connect_packet")
-      autoload :IsCreated, action_root.join("is_created")
-      autoload :IsStopped, action_root.join("is_stopped")
-      autoload :MessageAlreadyCreated, action_root.join("message_already_created")
-      autoload :MessageNotCreated, action_root.join("message_not_created")
-      autoload :MessageWillNotDestroy, action_root.join("message_will_not_destroy")
-      autoload :ReadSSHInfo, action_root.join("read_ssh_info")
-      autoload :ReadState, action_root.join("read_state")
-      autoload :RunInstance, action_root.join("run_instance")
-      autoload :StartInstance, action_root.join("start_instance")
-      autoload :StopInstance, action_root.join("stop_instance")
-      autoload :TerminateInstance, action_root.join("terminate_instance")
-      autoload :TimedProvision, action_root.join("timed_provision") # some plugins now expect this action to exist
-      autoload :WaitForState, action_root.join("wait_for_state")
-      autoload :WarnNetworks, action_root.join("warn_networks")
+      action_root = Pathname.new(File.expand_path('../action', __DIR__))
+      autoload :ConnectPacket, action_root.join('connect_packet')
+      autoload :IsCreated, action_root.join('is_created')
+      autoload :IsStopped, action_root.join('is_stopped')
+      autoload :MessageAlreadyCreated, action_root.join('message_already_created')
+      autoload :MessageNotCreated, action_root.join('message_not_created')
+      autoload :MessageWillNotDestroy, action_root.join('message_will_not_destroy')
+      autoload :ReadSSHInfo, action_root.join('read_ssh_info')
+      autoload :ReadState, action_root.join('read_state')
+      autoload :RunInstance, action_root.join('run_instance')
+      autoload :StartInstance, action_root.join('start_instance')
+      autoload :StopInstance, action_root.join('stop_instance')
+      autoload :TerminateInstance, action_root.join('terminate_instance')
+      autoload :TimedProvision, action_root.join('timed_provision') # some plugins now expect this action to exist
+      autoload :WaitForState, action_root.join('wait_for_state')
+      autoload :WarnNetworks, action_root.join('warn_networks')
     end
   end
 end

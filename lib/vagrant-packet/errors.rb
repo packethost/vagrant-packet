@@ -1,10 +1,12 @@
-require "vagrant"
+# frozen_string_literal: true
+
+require 'vagrant'
 
 module VagrantPlugins
   module Packet
     module Errors
       class VagrantPacketError < Vagrant::Errors::VagrantError
-        error_namespace("vagrant_packet.errors")
+        error_namespace('vagrant_packet.errors')
       end
 
       class FogError < VagrantPacketError

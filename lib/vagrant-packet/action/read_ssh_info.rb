@@ -1,4 +1,6 @@
-require "log4r"
+# frozen_string_literal: true
+
+require 'log4r'
 
 module VagrantPlugins
   module Packet
@@ -6,9 +8,9 @@ module VagrantPlugins
       # This action reads the SSH info for the machine and puts it into the
       # `:machine_ssh_info` key in the environment.
       class ReadSSHInfo
-        def initialize(app, env)
+        def initialize(app, _env)
           @app    = app
-          @logger = Log4r::Logger.new("vagrant_packet::action::read_ssh_info")
+          @logger = Log4r::Logger.new('vagrant_packet::action::read_ssh_info')
         end
 
         def call(env)
@@ -32,7 +34,7 @@ module VagrantPlugins
 
           ssh_host = server.hostname
 
-          return { :host => ssh_host, :port => 22 }
+          { host: ssh_host, port: 22 }
         end
       end
     end
