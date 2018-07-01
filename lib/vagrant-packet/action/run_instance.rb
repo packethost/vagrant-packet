@@ -31,8 +31,8 @@ module VagrantPlugins
 
           # Launch!
           env[:ui].info(I18n.t('vagrant_packet.launching_instance'))
-          env[:ui].info(" -- Project: #{machine.provider_config.project_id}")
-          env[:ui].info(" -- Facility: #{machine.provider_config.facility}")
+          env[:ui].info(" -- Project: #{machine.provider_config.project_id}") unless ENV['PACKET_PROJECT_ID']
+          env[:ui].info(" -- Facility: #{machine.provider_config.facility}") unless ENV['PACKET_FACILITY']
           env[:ui].info(" -- OS: #{machine.provider_config.operating_system}")
           env[:ui].info(" -- Machine: #{machine.provider_config.plan}")
 

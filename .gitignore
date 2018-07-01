@@ -12,6 +12,8 @@ pkg/*
 tags
 Gemfile.lock
 vendor
+bin
+.gems
 
 # Vagrant
 .vagrant

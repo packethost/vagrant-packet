@@ -27,10 +27,14 @@ Vagrant.configure("2") do |config|
     config.vm.provider :packet do |packet, override|
         # Create an API token within Packet
         # See https://help.packet.net/quick-start/api-integrations
+        # This can be read from the Environment Variable "PACKET_TOKEN".
+        # Setting via Environment variable is preferred to prevent possible secret leakage.
         packet.packet_token = "YOUR_PACKET_API_TOKEN"
 
         # Get your project ID
         # See https://help.packet.net/faq/onboarding/portal
+        # This can be read from the Environment Variable "PACKET_PROJECT_ID"
+        # Setting via Environment variable is preferred to prevent possible secret leakage.
         packet.project_id = "YOUR_PACKET_PROJECT_ID"
 
         # Example: sjc1
