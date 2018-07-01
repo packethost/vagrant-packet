@@ -22,6 +22,9 @@ en:
       Stopping the instance...
     terminating: |-
       Terminating the instance...
+    terminate_while_provisioning: |-
+      Cannot destroy a machine while provisioning. 
+      Wait for provisioning to finish then try again.
     waiting_for_ready: |-
       Waiting for instance to become "ready"...
     waiting_for_ssh: |-

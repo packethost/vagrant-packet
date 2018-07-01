@@ -18,8 +18,12 @@ module VagrantPlugins
 
           # Destroy the server and remove the tracking ID
           env[:ui].info(I18n.t('vagrant_packet.terminating'))
-          server.destroy
-          env[:machine].id = nil
+          begin
+            server.destroy
+            env[:machine].id = nil
+          rescue Exception => e
+            env[:ui].info(I18n.t('vagrant_packet.terminate_while_provisioning'))
+          end
 
           @app.call(env)
         end
