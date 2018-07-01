@@ -1,10 +1,19 @@
-deploy:
-  provider: rubygems
-  user:
-    secure: tzKyvP0PwvlSzT94Ycp4KsIvxZ5IaScIJ1V33a6bKyfVmOuFlywfqKVGXB/eijRTVCJUF9pCAGkIMeswjmf2AeLaZzLaS2tCnsNE+Ryrtsr8TUwZT2EdDVVvKhpJf5LKSvtbWgFRBz4R7T+ABzYB1QfoFKLH5/ShFCIZsqGAWmFj5wvKA2P+Q+W/oFdAcLPL6wUGDnQ/IPmgK0U5tQ9cycyBlmt1Lm8euNcUpYgID/jd9KsQHKgu1hntPwRxT0s15SLtQ4G6CNPEO5cLCeEoHHdXtTwC8mHhyYpYU9GqUEeb1jXhh+tnf4IwBm7T1hbBkbvS5HI6TCZwbJf85VUOS/vPkZCisfw5OWsHidiwVVme40AR4c0M4HdAHl3/xJgAC5KWXAvy3w4YtFz1ovzWM/9SrFiL8cIAyBXP9VScCHk0A44dn/9rB4dziXwzW7+nkNro+Qpbhq0b1Av+v3/JLw3sPaOxQeiLGIRvEH6SF9jwslZ3rzivWmT5/5TSuGcbL7Vwd+ALomULB3paFqMD7tqg/euRTI5lj17Mg4LYcPaYcuxpdAeTPpKXPKFOmCTWHfDZAU17tpmGR6NLlUmsN/QJBfUg0kmQNW6Z3VeGlmhrcls/JZi0tdc4uUAr5iMsXMeBZrEEKgDgQrEux1HQug6LPNsy9GkN7Isf/O6Hc10=
-  password:
-    secure: r2hoj8+Vpw9Bk+tu85Af3LsQ/KnFZzHQ8NSmGTWsG8XkgfqUjrEJJ33zQnxJce0o/FDfp7jyRJqzu3vtRH6e6xIVygpBHg/wsXn1OTjY80muuJn/6OFbZl+/MXUQNc+OJDVyQSNloyc9MyRECpG7GNUZYtNw98LUvywMCe7cmLjlf+CDpznXtT9y1yZgdxPNr8BmDj+PWXdgtJVwyQ0Tn1t/LhNkMBURg3aEJdCm2ol/XU4pX5jCC7m4vW2Blq5qGKlvpB0K53zZbuP1kLHDxXJ3VffP/DzgoSLVePZYjsbUxrMCv1ddoBoWRlPTmtex86KgkjsZPRjoIBYWFp49zha/F11h7xSBBJs/xbaOjFQYFTrkbl3zh7phkIS/IQ5RElJUVeGhaa+henkZcbKqF6Ee8dEmyQYrpliU4Xt4hgzRM9NZZjT62lMPh7Oi/xMwOgZko5YtuKPmuIVotKxhZQp1ioaWSJQjfcBA9bixRFvCI8LTxn4yXANcWT06UJFjFbYF1uQw5C8yfEP2hZYJTi1+NbHN1p5Ut/WlWUaGv+ECGmTKPjy3uCY4/6OXn5newmLbI6XSmQqyMpj6LhYSGvYxw7B4eDp5z1btX3QRIiqJ9/Hsnl7R0vfgIRV/HJIWjjdzT7hgyjKmNzTiVvWR4W54e2wilHiDH1ljkIQ3toc=
-  gem: vagrant-packet
-  on:
-    tags: true
-    repo: jeefy/vagrant-packet
+language: ruby
+sudo: false
+
+before_install:
+  - gem install bundler
+  - gem update bundler
+
+jobs:
+  include:
+    - stage: gem release
+      deploy:
+        provider: rubygems
+        api_key:
+          secure: "PvaqeT7zm7tKHqDN7oZtaroHbRpj1Il9YtnbjfMPmfOKegjAydn34Ny06afUEphdwlReFLOhF3fJI+lhQ1HH887kCKGoekzSoC41yn6CFI52aygnq04aH8pmuOGPJqem5VxjkpMRJdnrQecU76rRRt9uYMXI4qG49u5a6Xjjim0I/9/I79xrWo2nZ8GKc9OlJoi0xDKtjW+p1kii7zpLxOdbYjvbWugJqPUvMItfxBsY3r4pCYcKhekydimybYVN3KpHUSVf/0krAGhZwhYC/RszRDh1MmYnrRVuYKELIDrwBW+ejozlSpPI7dLJCB6FR6v2zeCrV7S+An/FLW/fZKOcTqeVGkhi+mg0/Gpcfxsj6x/4UIwVs6hxchpSXmByxBGa3vjfXx+a8iIYpu1EiZzBFGF07OS1GGndyL2HE8mjanKbcot9K5NW+RzylxXJUwFv3v091/gNdtSIQvcIGlCkDCDZwG5rWekCI0YdNuqfy/IpwpzixuRUFkDWPsc2MzYktm91AHsGXN7JWRGdJWKcQyIXxJ4ths+cq4fxK4U3LJw4OJx7RBOXtxJALH0QaaGLwwdIuklVJQAfv6P6lWVsqebH2e+Q13TlWGK+05XgqEykXKes7Nq8hwBWwkV6182yLquGISnKztMc7o1KMyp3AwWOue6t4Ks5Qc8Cgmk="
+        gem: vagrant-packet
+        gemspec: vagrant-packet.gemspec
+        on:
+          tags: true
+          branch: master
