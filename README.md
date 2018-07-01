@@ -7,11 +7,17 @@ Based heavily (almost completely) on the [Vagrant-AWS](https://github.com/mitche
 - [Packet](https://packet.net) provisions bare metal machines. It's cool.
   - Since they're bare metal, provision time is somewhat slower (5-10min) 
   - Once provisioned, I suggest `vagrant halt` and `vagrant up` for faster performance.
+  - Keeping machines around *does cost money* so running `vagrant destroy` once your short-term needs are met is a good idea.
 - You need to add your SSH Key within the Packet.net portal. Vagrant will not handle this for you. (Much like the [Vagrant-Google](https://github.com/mitchellh/vagrant-google) plugin.)
 - Your synced folders must use the rsync option (seen below) or it won't work.
 - There are some Packet-specific options required in the config. The example explains how to find and select the correct options.
 
-## Example Vagrantfile:
+## Installation and use:
+To install, run `vagrant plugin install vagrant-packet`
+
+You can then use the packet provider in Vagrant.
+
+Example Vagrantfile:
 ```
 Vagrant.configure("2") do |config|
     config.vm.box = "packet.box"
@@ -51,6 +57,8 @@ Vagrant.configure("2") do |config|
     end
 end
 ```
+
+With this vagrant file you can then run `vagrant up`
 
 ## Development
 To work on the `vagrant-packet` plugin, clone this repository out, and use
