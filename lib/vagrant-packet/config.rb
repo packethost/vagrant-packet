@@ -54,27 +54,28 @@ module VagrantPlugins
       end
 
       def finalize!
-        @packet_token             = nil if @packet_token == UNSET_VALUE
+        @packet_token             = (ENV['PACKET_TOKEN'] || nil) if @packet_token == UNSET_VALUE
         @instance_ready_timeout   = 600 if @instance_ready_timeout == UNSET_VALUE
         @instance_check_interval  = 10 if @instance_check_interval == UNSET_VALUE
-        @project_id               = nil if @project_id == UNSET_VALUE
+        @project_id               = (ENV['PACKET_PROJECT_ID'] || nil) if @project_id == UNSET_VALUE
         @hostname                 = nil if @hostname == UNSET_VALUE
-        @plan                     = nil if @plan == UNSET_VALUE
-        @facility                 = nil if @facility == UNSET_VALUE
+        @plan                     = (ENV['PACKET_PLAN'] || nil) if @plan == UNSET_VALUE
+        @facility                 = (ENV['PACKET_FACILITY'] || nil) if @facility == UNSET_VALUE
         @operating_system         = 'ubuntu_16_04' if @operating_system == UNSET_VALUE
         @description              = nil if @description == UNSET_VALUE
-        @billing_cycle            = nil if @billing_cycle == UNSET_VALUE
+        @billing_cycle            = (ENV['PACKET_BILLING_CYCLE'] || nil) if @billing_cycle == UNSET_VALUE
         @always_pxe               = nil if @always_pxe == UNSET_VALUE
         @ipxe_script_url          = nil if @ipxe_script_url == UNSET_VALUE
         @userdata                 = nil if @userdata == UNSET_VALUE
         @locked                   = nil if @locked == UNSET_VALUE
-        @hardware_reservation_id  = nil if @hardware_reservation_id == UNSET_VALUE
+        @hardware_reservation_id  = (ENV['PACKET_HARDWARE_RESERVATION_ID'] || nil) if
+                                    @hardware_reservation_id == UNSET_VALUE
         @spot_instance            = nil if @spot_instance == UNSET_VALUE
         @spot_price_max           = nil if @spot_price_max == UNSET_VALUE
         @termination_time         = nil if @termination_time == UNSET_VALUE
         @tags                     = nil if @tags == UNSET_VALUE
-        @project_ssh_keys         = nil if @project_ssh_keys == UNSET_VALUE
-        @user_ssh_keys            = nil if @user_ssh_keys == UNSET_VALUE
+        @project_ssh_keys         = (ENV['PACKET_PROJECT_SSH_KEYS'] || nil) if @project_ssh_keys == UNSET_VALUE
+        @user_ssh_keys            = (ENV['PACKET_USER_SSH_KEYS'] || nil) if @user_ssh_keys == UNSET_VALUE
         @features                 = nil if @features == UNSET_VALUE
       end
     end
