@@ -14,6 +14,10 @@ module VagrantPlugins
       class RunInstance
         include Vagrant::Util::Retryable
 
+        FOG_ERRORS = [
+          Fog::Errors::Error
+        ].freeze
+
         def initialize(app, _env)
           @app    = app
           @logger = Log4r::Logger.new('vagrant_packet::action::run_instance')
@@ -56,7 +60,7 @@ module VagrantPlugins
 
           begin
             server = env[:packet_compute].devices.create(options)
-          rescue *FOR_ERRORS => e
+          rescue *FOG_ERRORS => e
             # TODO: Flesh this out, mostly delete everything about the instance
             raise Errors::FogError, message: e.message
           end
