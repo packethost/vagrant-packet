@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'fog'
 require 'fog-packet'
 require 'log4r'
 require 'pp'
