@@ -11,7 +11,7 @@ jobs:
       deploy:
         provider: rubygems
         api_key:
-          secure: "PvaqeT7zm7tKHqDN7oZtaroHbRpj1Il9YtnbjfMPmfOKegjAydn34Ny06afUEphdwlReFLOhF3fJI+lhQ1HH887kCKGoekzSoC41yn6CFI52aygnq04aH8pmuOGPJqem5VxjkpMRJdnrQecU76rRRt9uYMXI4qG49u5a6Xjjim0I/9/I79xrWo2nZ8GKc9OlJoi0xDKtjW+p1kii7zpLxOdbYjvbWugJqPUvMItfxBsY3r4pCYcKhekydimybYVN3KpHUSVf/0krAGhZwhYC/RszRDh1MmYnrRVuYKELIDrwBW+ejozlSpPI7dLJCB6FR6v2zeCrV7S+An/FLW/fZKOcTqeVGkhi+mg0/Gpcfxsj6x/4UIwVs6hxchpSXmByxBGa3vjfXx+a8iIYpu1EiZzBFGF07OS1GGndyL2HE8mjanKbcot9K5NW+RzylxXJUwFv3v091/gNdtSIQvcIGlCkDCDZwG5rWekCI0YdNuqfy/IpwpzixuRUFkDWPsc2MzYktm91AHsGXN7JWRGdJWKcQyIXxJ4ths+cq4fxK4U3LJw4OJx7RBOXtxJALH0QaaGLwwdIuklVJQAfv6P6lWVsqebH2e+Q13TlWGK+05XgqEykXKes7Nq8hwBWwkV6182yLquGISnKztMc7o1KMyp3AwWOue6t4Ks5Qc8Cgmk="
+          secure: "R873GclxxHZNvjcvDVvJ3TI6mVNLj1eJsZsTz+HSvlbq7w3v5cMtvWStSKgXPUqaVcJdq6HACn++GOL0PAhj7AAnDHZd2I9q2OJEwmCx+ylCPh17SmhEHOTE5CK9SqEoqlKrJhsnDNR+KIg0dq42dNIm/iYOIMmNUtB1wCqkDii/w0SBTKejrMYg7P2UGNUolInmXqj6QKAZ96K4IVXGKMM8oUS1fnsnP0viEp1h8INonHWqN7Q3FLLx8mZ2J3dUPCZ2x0xCal2XCJ/DbYyH88HcBMl8DF4N4LS8GlG3L7eA9s5aCFlWllH+sEbd8UozAlD+3mULodbCEkVlKYOwepf+z560plW0s1rhyp5khVqBWJzfm+q+vcIoslLDJr7oiWNa03bE6W/TUcFe2tIC2SPe+R0aKpsqYH9Qkt0QMoHbvXTPuIYjP4M8U0MYxrvzgHZz5g71U9AFIP6IoHx2Dgq1FK4a5blYOU3+/xbE5dPQSVijEgj+0MbfYziP89PoLfnHiah088Kj4u8dRjkzxa2M/FZEDB97Lvtctwk79VSUVb9f2AP0znMRAu5Lac5yAJKmlzqBxMMKzr+ybMvBmDeJ02SNpl3kylwqyZ9+shOgWVzWINiMjj/D4qvDe0ILu+QkwMg+2muApBY1U6XInTOOb8AHajkBL7g61iFzvlE="
         gem: vagrant-packet
         gemspec: vagrant-packet.gemspec
         on:
