@@ -61,7 +61,6 @@ module VagrantPlugins
           begin
             server = env[:packet_compute].devices.create(options)
           rescue *FOG_ERRORS => e
-            # TODO: Flesh this out, mostly delete everything about the instance
             raise Errors::FogError, message: e.message
           end
 

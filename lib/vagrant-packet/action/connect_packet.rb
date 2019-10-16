@@ -19,6 +19,7 @@ module VagrantPlugins
         def call(env)
           @logger.info('Connecting to Packet...')
 
+          # TODO: [fog][DEPRECATION] Unable to load Fog::Packet::Compute. This must be changed at Fog and updated here accordingly
           env[:packet_compute] = Fog::Compute::Packet.new(packet_token: env[:machine].provider_config.packet_token)
 
           @app.call(env)
