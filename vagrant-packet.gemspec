@@ -19,11 +19,11 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'fog-packet', '~> 1.0'
 
-  s.add_development_dependency 'rake', '~> 12.3'
-  s.add_development_dependency 'rspec', '>= 3.5.0', '<= 3.6'
-  s.add_development_dependency 'rspec-its'
-  s.add_development_dependency 'rspec-legacy_formatters'
-  s.add_development_dependency 'rubocop', '~> 0.57'
+  s.add_development_dependency "rake", "~> 12.3"
+  s.add_development_dependency "rspec", ">= 3.5.0", "<= 3.6"
+  s.add_development_dependency "rspec-its", "~> 1.2"
+  s.add_development_dependency "rubocop", "~> 0.57"
+
 
   # The following block of code determines the files that should be included
   # in the gem. It does this by reading all the files in the directory where

@@ -9,7 +9,7 @@ module VagrantPlugins
       # `:machine_state_id` key in the environment.
       class ReadState
         def initialize(app, _env)
-          @app    = app
+          @app = app
           @logger = Log4r::Logger.new('vagrant_packet::action::read_state')
         end
 
@@ -23,9 +23,13 @@ module VagrantPlugins
           return :not_created if machine.id.nil?
 
           # Find the machine
-          server = packet.devices.get(machine.id)
-          if server.nil? || %i[shutting-down terminated].include?(server.state.to_sym)
-            # The machine can't be found
+          begin
+            server = packet.devices.get(machine.id)
+            if server.nil? || %i[shutting-down terminated].include?(server.state.to_sym)
+              # The machine can't be found
+              raise RuntimeError
+            end
+          rescue RuntimeError => e
             @logger.info('Machine not found or terminated, assuming it got destroyed.')
             machine.id = nil
             return :not_created
