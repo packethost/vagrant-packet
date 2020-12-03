@@ -1,7 +1,11 @@
+![](https://img.shields.io/badge/Stability-Experimental-red.svg)
+
 # Vagrant Packet Provider
 This [Vagrant](https://vagrantup.com) plugin allows you to create and manage packet.net instances. 
 
 Based heavily (almost completely) on the [Vagrant-AWS](https://github.com/mitchellh/vagrant-aws) provider written by [Mitchell Hashimoto](https://github.com/mitchellh)
+
+This repository is [Experimental](https://github.com/packethost/standards/blob/master/experimental-statement.md) meaning that it's based on untested ideas or techniques and not yet established or finalized or involves a radically new and innovative style! This means that support is best effort (at best!) and we strongly encourage you to NOT use this in production.
 
 ## Of note:
 - [Packet](https://packet.net) provisions bare metal machines. It's cool.
